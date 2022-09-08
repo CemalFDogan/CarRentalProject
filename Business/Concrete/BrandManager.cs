@@ -16,19 +16,19 @@ namespace Business.Concrete
             _brandDal = brandDal;
         }
 
-        public void Add(Brand color)
+        public void Add(Brand brand)
         {
-            _brandDal.Add(color);
+            _brandDal.Add(brand);
         }
 
-        public void Delete(Brand color)
+        public void Delete(Brand brand)
         {
-            _brandDal.Delete(color);
+            _brandDal.Delete(brand);
         }
 
-        public void Update(Brand color)
+        public void Update(Brand brand)
         {
-            _brandDal.Update(color);
+            _brandDal.Update(brand);
         }
 
 

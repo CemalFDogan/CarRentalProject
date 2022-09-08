@@ -9,22 +9,55 @@ namespace ConsoleUI
     {
         static void Main(string[] args)
         {
-            ColorManager colorManager = new ColorManager(new EfColorDal());
+            //ColorTest();
+            //BrandTest();
+            //CarTest1();
 
-            colorManager.Add(new Color { ColorName = "Blue", Id =1 });
+            CarManager carManager = new CarManager(new EfCarDal());
+
+            
+            
+            foreach (var car in carManager.GetCarDetails())
+            {
+                Console.WriteLine($"{car.CarName} : {car.BrandName} : {car.ColorName} : {car.DailyPrice}");              
+            }
+
+        }
+
+        private static void CarTest1()
+        {
+            CarManager carManager = new CarManager(new EfCarDal());
+
+           
+            foreach (var car in carManager.GetAll())
+            {
+                if (car.CarName == "Duster")
+                {
+                    carManager.Update(new Car(){ColorId = 2});
+                }
+            }
+        }
+
+        private static void BrandTest()
+        {
+            BrandManager brandManager = new BrandManager(new EfBrandDal());
+
+            brandManager.Add(new Brand() { BrandName = "Opel" });
+
+            foreach (var brand in brandManager.GetBrands())
+            {
+                Console.WriteLine(brand.BrandName + " : " + brand.Id);
+            }
+        }
+
+        private static void ColorTest()
+        {
+            ColorManager colorManager = new ColorManager(new EfColorDal());
 
             foreach (var color in colorManager.GetColors())
             {
-                Console.WriteLine($"{color.Id} : {color.ColorName}");
-
+                Console.WriteLine(color.ColorName);
             }
-
-
-
-
-
-            BrandManager brandManager = new BrandManager(new EfBrandDal());
-            CarManager carManager = new CarManager(new EfCarDal());
         }
     }
 }

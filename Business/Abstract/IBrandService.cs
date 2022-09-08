@@ -10,8 +10,8 @@ namespace Business.Abstract
         List<Brand> GetBrands();
         Brand GetBrandById(int brandId);
         
-        void Add(Brand color);
-        void Delete(Brand color);
-        void Update(Brand color);
+        void Add(Brand brand);
+        void Delete(Brand brand);
+        void Update(Brand brand);
     }
 }
