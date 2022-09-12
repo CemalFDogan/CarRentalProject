@@ -1,5 +1,7 @@
 ﻿using Business.Abstract;
+using Core.Utilities.Results;
 using DataAccess.Abstract;
+using DataAccess.Concrete.EntityFramework;
 using Entities.Concrete;
 using System;
 using System.Collections.Generic;
@@ -16,30 +18,32 @@ namespace Business.Concrete
             _colorDal = colorDal;
         }
 
-        public void Add(Color color)
+        public IResult Add(Color color)
         {
             _colorDal.Add(color);
+            return new SuccessResult($"{color.ColorName} başarılı bir şekilde listeye eklenmiştir!");
         }
 
-        public void Delete(Color color)
+        public IResult Delete(Color color)
         {
             _colorDal.Delete(color);
+            return new SuccessResult($"{color.ColorName} başarılı bir şekilde listeden silinmiştir!");
         }
 
-        public void Update(Color color)
+        public IDataResult<Color> GetById(int colorId)
+        {
+            return new SuccessDataResult<Color>(_colorDal.Get(co => co.Id == colorId));
+        }
+
+        public IDataResult<List<Color>> GetColors()
+        {
+            return new DataResult<List<Color>>(_colorDal.GetAll(), true);
+        }
+
+        public IResult Update(Color color)
         {
             _colorDal.Update(color);
-        }
-
-
-        public Color GetColorById(int colorId)
-        {
-            return _colorDal.Get(c => c.Id == colorId);
-        }
-
-        public List<Color> GetColors()
-        {
-            return _colorDal.GetAll();
+            return new SuccessDataResult<Color>($"Id numarası {color.Id} olan renk başarılı bir şekilde güncellenmiştir!");
         }
     }
 }
